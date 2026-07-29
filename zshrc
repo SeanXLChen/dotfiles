@@ -72,6 +72,7 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
+# Load Oh My Zsh itself
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -118,30 +119,31 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# User-local binaries (pip --user, uv tools, etc.)
 export PATH="/Users/sean.chen/.local/bin:$PATH"
 
-
-# eza alias ls
-alias ls="eza --icons --grid --group-directories-first"
-
-# cat alias bat
-alias cat="bat"
-
-# man alias tldr
-alias man="tldr"
-
-# Added by quandri-dev upgrade
-# eza — better ls
-alias ls='eza --icons --group-directories-first'
-alias ll='eza --icons --long --group-directories-first'
-alias la='eza --icons --long --all --group-directories-first'
-alias lt='eza --icons --tree --group-directories-first'
+# --- Aliases (alphabetical) ---
 
 # bat — better cat
 alias cat='bat'
 
-# lazygit
+# eza — long + all, group dirs first
+alias la='eza --icons --long --all --group-directories-first'
+
+# lazygit — git TUI
 alias lg='lazygit'
+
+# eza — long, group dirs first
+alias ll='eza --icons --long --group-directories-first'
+
+# eza — better ls
+alias ls='eza --icons --group-directories-first'
+
+# eza — tree view, group dirs first
+alias lt='eza --icons --tree --group-directories-first'
+
+# tldr — friendlier man pages
+alias man="tldr"
 
 # zoxide — smarter cd (replaces cd)
 eval "$(zoxide init zsh)"
