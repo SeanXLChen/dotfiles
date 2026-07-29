@@ -1,0 +1,8 @@
+.DS_Store
+*.bak
+*.local
+.env
+*secret*
+*token*
+*credential*
+*password*

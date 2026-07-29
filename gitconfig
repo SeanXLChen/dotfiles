@@ -1,0 +1,5 @@
+[user]
+	name = Sean Chen
+	email = sean.chen@quandri.io
+[pull]
+	rebase = true
