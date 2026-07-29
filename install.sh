@@ -22,6 +22,13 @@ link zprofile .zprofile
 link gitconfig .gitconfig
 link config/git/ignore .config/git/ignore
 
+# Install CLI tools the aliases/functions in zshrc depend on (eza, bat, etc.)
+if command -v brew >/dev/null 2>&1; then
+  brew bundle --file="$DOTFILES/Brewfile" || echo "brew bundle failed — rerun manually: brew bundle --file=$DOTFILES/Brewfile"
+else
+  echo "homebrew not found — skipping Brewfile install, run it manually later"
+fi
+
 # Secrets (~/.zshrc.local) are intentionally NOT managed here — see README
 # for pulling them from 1Password onto a new machine.
 echo "done. put machine-local secrets in ~/.zshrc.local (sourced automatically, not tracked)."
