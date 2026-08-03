@@ -162,3 +162,6 @@ function y() {
 
 # Private, machine-local secrets (not tracked in dotfiles repo)
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+# zsh-syntax-highlighting — must be sourced last (per its own docs)
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
