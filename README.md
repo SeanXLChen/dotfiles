@@ -18,14 +18,16 @@ git clone https://github.com/SeanXLChen/dotfiles.git ~/GitHub/dotfiles
 
 `zshrc` sources `~/.zshrc.local` if present — that file is **not** tracked here (see `.gitignore`) since it holds real API keys / passwords.
 
-On a new machine, before (or after) running `install.sh`:
+There's a single 1Password document, `zshrc.local` (Private vault), that's meant to hold the union of every machine's secrets — not a per-machine copy. So it's always **pull, merge, push**, never overwrite:
 
-1. Store `.zshrc.local`'s contents as a document/secure note in 1Password (e.g. item "zshrc.local").
-2. Pull it down to `~/.zshrc.local` — either paste manually, or via CLI:
-   ```sh
-   op document get "zshrc.local" --out-file ~/.zshrc.local
-   chmod 600 ~/.zshrc.local
-   ```
+**Adding/changing a secret on a machine:**
+1. Pull the current copy down (see below) and open it next to your local `~/.zshrc.local`.
+2. Merge by hand — add your new/changed line(s) into the pulled copy, keeping whatever other machines already added.
+3. Save the merged result back to 1Password:
+   - Have `op` CLI + signed in: `op document edit "zshrc.local" <merged-file>`
+   - No CLI: paste the merged content into the `zshrc.local` document in the 1Password app.
+
+**Setting up on a (new or existing) machine:**
+1. Pull it down — `op document get "zshrc.local" --out-file ~/.zshrc.local` (or copy-paste from the app if no CLI).
+2. `chmod 600 ~/.zshrc.local`
 3. Open a new shell — secrets load automatically.
-
-Keep the 1Password copy updated whenever you rotate a key locally.
