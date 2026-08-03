@@ -5,3 +5,4 @@ brew "lazygit"  # git TUI (lg)
 brew "zoxide"   # smarter cd
 brew "yazi"     # terminal file manager (y function)
 brew "tlrc"     # tldr client (man replacement)
+brew "zsh-syntax-highlighting"  # fish-like command syntax highlighting
