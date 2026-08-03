@@ -4,7 +4,7 @@ Dotfiles for macOS dev setup — shell + git + AI tooling configs
 ## What's here
 
 - `zshrc`, `zprofile`, `gitconfig`, `config/git/ignore` — tracked config, symlinked into `$HOME`
-- `Brewfile` — CLI tools the aliases/functions in `zshrc` depend on (eza, bat, lazygit, zoxide, yazi, tlrc)
+- `Brewfile` — CLI tools the aliases/functions in `zshrc` depend on (eza, bat, lazygit, zoxide, yazi, tlrc, zsh-syntax-highlighting)
 - `install.sh` — symlinks each file into place (backing up any existing real file to `*.bak`), then runs `brew bundle` to install missing tools
 
 ## Install
