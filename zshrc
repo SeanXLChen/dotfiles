@@ -120,12 +120,28 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 # User-local binaries (pip --user, uv tools, etc.)
-export PATH="/Users/sean.chen/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
 
 # --- Aliases (alphabetical) ---
 
 # bat — better cat
 alias cat='bat'
+
+# Claude Code — disable Claude.ai -> Claude Code MCP auto-sync
+alias claude='ENABLE_CLAUDEAI_MCP_SERVERS=false claude'
 
 # eza — long + all, group dirs first
 alias la='eza --icons --long --all --group-directories-first'
@@ -144,6 +160,9 @@ alias lt='eza --icons --tree --group-directories-first'
 
 # tldr — friendlier man pages
 alias man="tldr"
+
+# 1Password CLI — completion
+eval "$(op completion zsh)"; compdef _op op
 
 # zoxide — smarter cd (replaces cd)
 eval "$(zoxide init zsh)"
