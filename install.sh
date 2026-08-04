@@ -17,6 +17,7 @@ link() {
   echo "linked $dst -> $src"
 }
 
+link zshenv .zshenv
 link zshrc .zshrc
 link zprofile .zprofile
 link gitconfig .gitconfig

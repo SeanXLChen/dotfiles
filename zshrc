@@ -168,7 +168,8 @@ alias pip='pip3'
 # 1Password CLI — completion
 eval "$(op completion zsh)"; compdef _op op
 
-# zoxide — smarter cd (replaces cd)
+# zoxide — smarter cd (replaces cd); disable the startup doctor/health-check nag
+export _ZO_DOCTOR=0
 eval "$(zoxide init zsh)"
 
 # yazi — cd into last directory on exit
