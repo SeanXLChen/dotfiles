@@ -3,7 +3,7 @@ Dotfiles for macOS dev setup — shell + git + AI tooling configs
 
 ## What's here
 
-- `zshenv`, `zshrc`, `zprofile`, `gitconfig`, `config/git/ignore` — tracked config, symlinked into `$HOME`
+- `zshenv`, `zshrc`, `zprofile`, `gitconfig`, `config/git/ignore`, `ssh-config` — tracked config, symlinked into `$HOME`
 - `Brewfile` — CLI tools the aliases/functions in `zshrc` depend on (eza, bat, lazygit, zoxide, yazi, tlrc, zsh-syntax-highlighting, zsh-autosuggestions, uv, python@3.14, 1password-cli)
 - `install.sh` — symlinks each file into place (backing up any existing real file to `*.bak`), then runs `brew bundle` to install missing tools
 
@@ -45,3 +45,21 @@ There's a single 1Password document, `zshrc.local` (Private vault), that's meant
 1. Pull it down — `op document get "zshrc.local" --out-file ~/.zshrc.local` (or copy-paste from the app if no CLI).
 2. `chmod 600 ~/.zshrc.local`
 3. Open a new shell — secrets load automatically.
+
+## SSH
+
+`ssh-config` (symlinked to `~/.ssh/config`) points every host at the 1Password SSH agent:
+
+```
+Host *
+	IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+```
+
+The actual SSH key lives only in 1Password (item "id_ed25519 (Personal - shared across machines)", Private vault) — it's never on disk as a plaintext file on any machine. To use it on a (new or existing) machine:
+
+1. Install/open the 1Password app, sign in.
+2. Settings → Developer → enable "Use the SSH agent".
+3. Run `install.sh` (symlinks `ssh-config` into place) or manually copy the snippet above into `~/.ssh/config`.
+4. `ssh -T git@github.com` should authenticate without any local key file.
+
+This key is shared across personal machines only — a work machine should get its own separate key/item, not this one.

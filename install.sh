@@ -22,6 +22,7 @@ link zshrc .zshrc
 link zprofile .zprofile
 link gitconfig .gitconfig
 link config/git/ignore .config/git/ignore
+link ssh-config .ssh/config
 
 # Install CLI tools the aliases/functions in zshrc depend on (eza, bat, etc.)
 if command -v brew >/dev/null 2>&1; then
