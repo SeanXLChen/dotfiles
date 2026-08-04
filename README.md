@@ -14,7 +14,9 @@ git clone https://github.com/SeanXLChen/dotfiles.git ~/GitHub/dotfiles
 ~/GitHub/dotfiles/install.sh
 ```
 
-Then create `~/.gitconfig.local` (not tracked — see Git identity below) before your first commit on the machine.
+Then, before this machine can push/pull over SSH or use signing:
+- Create `~/.gitconfig.local` — see Git identity below.
+- Set up the 1Password SSH agent — see SSH below. `install.sh` only symlinks the config; it does **not** enable the agent, so `git@github.com` will fail to authenticate until you've done that manually.
 
 ## Git identity
 
@@ -55,11 +57,18 @@ Host *
 	IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 ```
 
-The actual SSH key lives only in 1Password (item "id_ed25519 (Personal - shared across machines)", Private vault) — it's never on disk as a plaintext file on any machine. To use it on a (new or existing) machine:
+The actual SSH key lives only in 1Password (item "id_ed25519 (Personal - shared across machines)", Private vault) — it's never on disk as a plaintext file on any machine.
 
-1. Install/open the 1Password app, sign in.
-2. Settings → Developer → enable "Use the SSH agent".
-3. Run `install.sh` (symlinks `ssh-config` into place) or manually copy the snippet above into `~/.ssh/config`.
-4. `ssh -T git@github.com` should authenticate without any local key file.
+**Required on every machine — `install.sh` cannot do this part for you:**
+1. Install the 1Password app on this machine and sign in to the same account.
+2. In the app: Settings → Developer → enable "Use the SSH agent".
+
+Only after both of those are done does `ssh-config` (symlinked by `install.sh`, or paste the snippet above manually) actually work — the socket it points to doesn't exist until the agent is enabled. Verify with:
+
+```sh
+ssh -T git@github.com   # should authenticate with no local key file present
+```
+
+If this fails with "Could not open a connection to your authentication agent" or similar, the 1Password SSH agent isn't enabled yet — go do step 2.
 
 This key is shared across personal machines only — a work machine should get its own separate key/item, not this one.
