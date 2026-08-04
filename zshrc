@@ -161,6 +161,10 @@ alias lt='eza --icons --tree --group-directories-first'
 # tldr — friendlier man pages
 alias man="tldr"
 
+# Homebrew python@ formulae only put `python3`/`pip3` on PATH, not unversioned
+alias python='python3'
+alias pip='pip3'
+
 # 1Password CLI — completion
 eval "$(op completion zsh)"; compdef _op op
 
