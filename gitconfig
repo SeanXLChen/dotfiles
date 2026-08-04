@@ -1,5 +1,4 @@
-[user]
-	name = SeanXLChen
-	email = xiaolaiseanchen@gmail.com
+[include]
+	path = ~/.gitconfig.local
 [pull]
 	rebase = true

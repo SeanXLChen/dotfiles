@@ -14,6 +14,20 @@ git clone https://github.com/SeanXLChen/dotfiles.git ~/GitHub/dotfiles
 ~/GitHub/dotfiles/install.sh
 ```
 
+Then create `~/.gitconfig.local` (not tracked — see Git identity below) before your first commit on the machine.
+
+## Git identity
+
+`gitconfig` has no `[user]` section — it `include`s `~/.gitconfig.local` instead, since name/email vary per machine (e.g. work vs. personal) and shouldn't be baked into a shared, public repo. On a new machine:
+
+```sh
+cat > ~/.gitconfig.local << 'EOF'
+[user]
+	name = Your Name
+	email = your@email.com
+EOF
+```
+
 ## Secrets
 
 `zshrc` sources `~/.zshrc.local` if present — that file is **not** tracked here (see `.gitignore`) since it holds real API keys / passwords.
