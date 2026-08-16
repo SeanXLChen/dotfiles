@@ -25,8 +25,11 @@ link config/git/ignore .config/git/ignore
 link ssh-config .ssh/config
 
 # Claude Code global config
+# CLAUDE.md is a plain symlink; settings.json is GENERATED (shared repo layer +
+# untracked ~/.claude/settings.machine.json) because Claude Code writes into it
+# and part of the machine layer is sensitive — see claude/build-settings.sh.
 link claude/CLAUDE.md .claude/CLAUDE.md
-link claude/settings.json .claude/settings.json
+"$DOTFILES/claude/build-settings.sh"
 
 # Install CLI tools the aliases/functions in zshrc depend on (eza, bat, etc.)
 if command -v brew >/dev/null 2>&1; then

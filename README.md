@@ -4,7 +4,7 @@ Dotfiles for macOS dev setup — shell + git + AI tooling configs
 ## What's here
 
 - `zshenv`, `zshrc`, `zprofile`, `gitconfig`, `config/git/ignore`, `ssh-config` — tracked config, symlinked into `$HOME`
-- `claude/CLAUDE.md`, `claude/settings.json` — global Claude Code config, symlinked into `~/.claude/`
+- `claude/CLAUDE.md` (symlinked), `claude/settings.shared.json` + `claude/build-settings.sh` (generate `~/.claude/settings.json`) — global Claude Code config, see Claude Code section
 - `Brewfile` — CLI tools the aliases/functions in `zshrc` depend on (eza, bat, lazygit, zoxide, yazi, tlrc, zsh-syntax-highlighting, zsh-autosuggestions, uv, python@3.14, 1password-cli)
 - `install.sh` — symlinks each file into place (backing up any existing real file to `*.bak`), then runs `brew bundle` to install missing tools
 
@@ -27,7 +27,20 @@ git clone git@github.com:SeanXLChen/second-brain.git ~/second-brain
 
 ## Claude Code
 
-`claude/CLAUDE.md` + `claude/settings.json` are symlinked into `~/.claude/` by `install.sh` — global instructions (second-brain conventions, Notion workspace map) plus permissions, hooks, and the plugin/marketplace list (so `plan-review-consensus`, `ponytail`, etc. come along automatically once the marketplace is reachable). MCP server configs (`mcp.json`) are **not** committed — they hold API tokens; reconfigure manually per machine.
+`claude/CLAUDE.md` is symlinked into `~/.claude/` by `install.sh`.
+
+`~/.claude/settings.json` is **generated, not symlinked** — Claude Code writes into it itself (plugin installs, "don't ask again"), and part of the config is machine-specific or sensitive. `install.sh` runs `claude/build-settings.sh`, which deep-merges two layers (machine wins):
+
+| file | tracked | holds |
+|------|---------|-------|
+| `claude/settings.shared.json` | ✅ | permissions (incl. the deny rules below), enabled plugins, marketplaces, machine-independent env |
+| `~/.claude/settings.machine.json` | ❌ | hooks, statusLine, absolute paths, work-internal env — anything machine-specific or sensitive |
+
+Re-run `claude/build-settings.sh` after every `git pull`. If Claude Code wrote something into the generated file since the last build (new plugin, don't-ask-again permission), the script stops and tells you which key to fold back into which layer before rebuilding; `--force` discards. `model` is unmanaged — the script preserves whatever the live file has.
+
+The shared layer ships a `permissions.deny` list blocking the agent from touching credential/config surfaces (`~/.aws/**`, `~/.ssh/**`, `~/.zshrc.local`, SSO token cache, and `~/.claude/settings.json` itself) — so an agent in auto mode can't silently escalate its own access by rewriting AWS profiles or its own permission file.
+
+MCP server configs (`mcp.json`) are **not** committed — they hold API tokens; reconfigure manually per machine. Vault-coupled custom skills live in `~/second-brain/dotfiles/`, not here.
 
 ## Git identity
 

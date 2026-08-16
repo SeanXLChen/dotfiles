@@ -1,0 +1,77 @@
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "permissions": {
+    "allow": [
+      "WebFetch",
+      "Read"
+    ],
+    "deny": [
+      "Edit(~/.aws/**)",
+      "Bash(aws configure*)",
+      "Read(~/.aws/credentials)",
+      "Read(~/.aws/sso/cache/**)",
+      "Edit(~/.ssh/**)",
+      "Read(~/.zshrc.local)",
+      "Edit(~/.zshrc.local)",
+      "Edit(~/.claude/settings.json)"
+    ],
+    "defaultMode": "auto"
+  },
+  "enabledPlugins": {
+    "caveman@caveman": true,
+    "ponytail@ponytail": true,
+    "coding-standards@quandri-marketplace": true,
+    "figma@claude-plugins-official": true,
+    "github@claude-plugins-official": true,
+    "linear-project-update@quandri-marketplace": true,
+    "linear@claude-plugins-official": true,
+    "notion@claude-plugins-official": true,
+    "plan-review-consensus@quandri-marketplace": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "slack@claude-plugins-official": true,
+    "workflow@quandri-marketplace": true,
+    "labelstudio@quandri-marketplace": true,
+    "reflections@quandri-marketplace": true,
+    "quandri-brand@quandri-marketplace": true,
+    "brain-cloud@quandri-marketplace": true,
+    "claude-dashboard@claude-dashboard": true,
+    "intelligence@quandri-marketplace": true,
+    "daily-usrq-report@quandri-marketplace": true,
+    "bastisesh@quandri-marketplace": true,
+    "re-analyze-policy@quandri-marketplace": true
+  },
+  "extraKnownMarketplaces": {
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    },
+    "quandri-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "Quandri/qlaude-marketplace"
+      },
+      "autoUpdate": true
+    },
+    "claude-dashboard": {
+      "source": {
+        "source": "github",
+        "repo": "uppinote20/claude-dashboard"
+      }
+    }
+  },
+  "effortLevel": "medium",
+  "autoDreamEnabled": true,
+  "skipDangerousModePermissionPrompt": true,
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true
+}
