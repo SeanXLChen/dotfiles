@@ -4,6 +4,7 @@ Dotfiles for macOS dev setup — shell + git + AI tooling configs
 ## What's here
 
 - `zshenv`, `zshrc`, `zprofile`, `gitconfig`, `config/git/ignore`, `ssh-config` — tracked config, symlinked into `$HOME`
+- `claude/CLAUDE.md`, `claude/settings.json` — global Claude Code config, symlinked into `~/.claude/`
 - `Brewfile` — CLI tools the aliases/functions in `zshrc` depend on (eza, bat, lazygit, zoxide, yazi, tlrc, zsh-syntax-highlighting, zsh-autosuggestions, uv, python@3.14, 1password-cli)
 - `install.sh` — symlinks each file into place (backing up any existing real file to `*.bak`), then runs `brew bundle` to install missing tools
 
@@ -17,6 +18,16 @@ git clone https://github.com/SeanXLChen/dotfiles.git ~/GitHub/dotfiles
 Then, before this machine can push/pull over SSH or use signing:
 - Create `~/.gitconfig.local` — see Git identity below.
 - Set up the 1Password SSH agent — see SSH below. `install.sh` only symlinks the config; it does **not** enable the agent, so `git@github.com` will fail to authenticate until you've done that manually.
+
+Then clone `second-brain` to `~/second-brain/` (Obsidian vault the Claude config references):
+
+```sh
+git clone git@github.com:SeanXLChen/second-brain.git ~/second-brain
+```
+
+## Claude Code
+
+`claude/CLAUDE.md` + `claude/settings.json` are symlinked into `~/.claude/` by `install.sh` — global instructions (second-brain conventions, Notion workspace map) plus permissions, hooks, and the plugin/marketplace list (so `plan-review-consensus`, `ponytail`, etc. come along automatically once the marketplace is reachable). MCP server configs (`mcp.json`) are **not** committed — they hold API tokens; reconfigure manually per machine.
 
 ## Git identity
 

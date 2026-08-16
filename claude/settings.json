@@ -1,0 +1,151 @@
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "OBSIDIAN_VAULT_PATH": "/Users/sean.chen/second-brain"
+  },
+  "permissions": {
+    "allow": [
+      "WebFetch",
+      "Bash",
+      "Read"
+    ],
+    "defaultMode": "auto"
+  },
+  "model": "sonnet",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/local/bin/aicodemetricsd hook claude --hook-input stdin"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/local/bin/aicodemetricsd hook claude --hook-input stdin"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/local/bin/aicodemetricsd hook claude --hook-input stdin"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/local/bin/aicodemetricsd hook claude --hook-input stdin"
+          }
+        ]
+      }
+    ],
+    "PostCompact": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/sean.chen/.claude/skills/obsidian-second-brain/hooks/obsidian-bg-agent.sh",
+            "timeout": 10,
+            "async": true
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/sean.chen/codep/adapters/claude-code/on-busy.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/sean.chen/codep/adapters/claude-code/on-idle.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "node /Users/sean.chen/.claude/plugins/cache/claude-dashboard/claude-dashboard/1.26.2/dist/index.js"
+  },
+  "enabledPlugins": {
+    "caveman@caveman": true,
+    "ponytail@ponytail": true,
+    "coding-standards@quandri-marketplace": true,
+    "figma@claude-plugins-official": true,
+    "github@claude-plugins-official": true,
+    "linear-project-update@quandri-marketplace": true,
+    "linear@claude-plugins-official": true,
+    "notion@claude-plugins-official": true,
+    "plan-review-consensus@quandri-marketplace": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "slack@claude-plugins-official": true,
+    "workflow@quandri-marketplace": true,
+    "labelstudio@quandri-marketplace": true,
+    "reflections@quandri-marketplace": true,
+    "quandri-brand@quandri-marketplace": true,
+    "brain-cloud@quandri-marketplace": true,
+    "claude-dashboard@claude-dashboard": true,
+    "intelligence@quandri-marketplace": true,
+    "daily-usrq-report@quandri-marketplace": true,
+    "bastisesh@quandri-marketplace": true,
+    "re-analyze-policy@quandri-marketplace": true
+  },
+  "extraKnownMarketplaces": {
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    },
+    "quandri-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "Quandri/qlaude-marketplace"
+      },
+      "autoUpdate": true
+    },
+    "claude-dashboard": {
+      "source": {
+        "source": "github",
+        "repo": "uppinote20/claude-dashboard"
+      }
+    }
+  },
+  "effortLevel": "medium",
+  "autoDreamEnabled": true,
+  "skipDangerousModePermissionPrompt": true,
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true
+}

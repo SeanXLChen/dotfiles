@@ -24,6 +24,10 @@ link gitconfig .gitconfig
 link config/git/ignore .config/git/ignore
 link ssh-config .ssh/config
 
+# Claude Code global config
+link claude/CLAUDE.md .claude/CLAUDE.md
+link claude/settings.json .claude/settings.json
+
 # Install CLI tools the aliases/functions in zshrc depend on (eza, bat, etc.)
 if command -v brew >/dev/null 2>&1; then
   brew bundle --file="$DOTFILES/Brewfile" || echo "brew bundle failed — rerun manually: brew bundle --file=$DOTFILES/Brewfile"
