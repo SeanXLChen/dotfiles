@@ -25,6 +25,10 @@
 
 用户常用话术：「Notion」「购物清单」「家庭 todo」「工作 Notion」→ check workspace first.
 
+## Git Workflow
+
+- 我们的repo都是squash merge，所以feature branch内部commit graph进main时不保留 —— rebase不会带来任何图谱整洁收益。更新feature branch时优先 `merge main`（resolve, test, 正常push），而不是 `rebase main` + `--force-with-lease`。force-push只留给自己有意整理WIP commits时用（且只对自己的feature branch），绝不用force-push代替冲突解决。详见 second-brain `wiki/guidelines/git-workflow.md`。
+
 ## 规则
 
 - 在Linear上创建comment之前必须先confirm用户
