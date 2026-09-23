@@ -25,6 +25,8 @@ Then clone `second-brain` to `~/second-brain/` (Obsidian vault the Claude config
 git clone git@github.com:SeanXLChen/second-brain.git ~/second-brain
 ```
 
+Then rerun `install.sh` so it can link Claude's memory into the vault (see below).
+
 ## Claude Code
 
 `claude/CLAUDE.md` is symlinked into `~/.claude/` by `install.sh`.
@@ -39,6 +41,10 @@ git clone git@github.com:SeanXLChen/second-brain.git ~/second-brain
 Re-run `claude/build-settings.sh` after every `git pull`. If Claude Code wrote something into the generated file since the last build (new plugin, don't-ask-again permission), the script stops and tells you which key to fold back into which layer before rebuilding; `--force` discards. `model` is unmanaged — the script preserves whatever the live file has.
 
 The shared layer ships a `permissions.deny` list blocking the agent from touching credential/config surfaces (`~/.aws/**`, `~/.ssh/**`, `~/.zshrc.local`, SSO token cache, and `~/.claude/settings.json` itself) — so an agent in auto mode can't silently escalate its own access by rewriting AWS profiles or its own permission file.
+
+**Where to launch Claude:** not in `~`. Claude Code never persists folder trust for the home directory (trust is inherited by subdirectories, so trusting `~` would trust every repo you clone), so it asks on every launch. Use `cb` (`zshrc`) to start in `~/second-brain`, or run `claude` inside a specific repo. Don't trust a parent of many repos like `~/GitHub` for the same reason. Launch dir does not limit which files Claude can reach; it picks the project config, `CLAUDE.md` and memory.
+
+**Memory:** Claude's auto-memory is stored per launch dir under `~/.claude/projects/<encoded-path>/memory/`. It is work-sensitive, so it is **not** in this public repo. It lives in the private vault at `~/second-brain/.claude-memory/`, and `install.sh` symlinks the `~/second-brain` project's memory dir to it. If a machine already has a real memory dir there, `install.sh` moves it to `memory.bak`; merge it into the vault by hand (merge `MEMORY.md` indexes too, not only the files).
 
 MCP server configs (`mcp.json`) are **not** committed — they hold API tokens; reconfigure manually per machine. Vault-coupled custom skills live in `~/second-brain/dotfiles/`, not here.
 

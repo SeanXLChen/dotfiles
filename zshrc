@@ -142,6 +142,8 @@ alias cat='bat'
 
 # Claude Code — disable Claude.ai -> Claude Code MCP auto-sync
 alias claude='ENABLE_CLAUDEAI_MCP_SERVERS=false claude'
+# cb — start Claude in the vault; ~ trust is never saved, and memory is keyed there
+alias cb='cd ~/second-brain && claude'
 
 # eza — long + all, group dirs first
 alias la='eza --icons --long --all --group-directories-first'

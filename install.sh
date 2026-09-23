@@ -31,6 +31,23 @@ link ssh-config .ssh/config
 link claude/CLAUDE.md .claude/CLAUDE.md
 "$DOTFILES/claude/build-settings.sh"
 
+# Claude auto-memory lives in the private vault, not this public repo. Claude
+# keys memory by launch dir, so link the one for ~/second-brain (launch there:
+# trust in ~ is never persisted).
+MEMORY_SRC="$HOME/second-brain/.claude-memory"
+MEMORY_DST="$HOME/.claude/projects/$(printf '%s' "$HOME/second-brain" | sed 's/[^A-Za-z0-9]/-/g')/memory"
+if [ -d "$MEMORY_SRC" ]; then
+  mkdir -p "$(dirname "$MEMORY_DST")"
+  if [ -e "$MEMORY_DST" ] && [ ! -L "$MEMORY_DST" ]; then
+    echo "backing up existing $MEMORY_DST -> $MEMORY_DST.bak (merge it into $MEMORY_SRC by hand)"
+    mv "$MEMORY_DST" "$MEMORY_DST.bak"
+  fi
+  ln -sfn "$MEMORY_SRC" "$MEMORY_DST"
+  echo "linked $MEMORY_DST -> $MEMORY_SRC"
+else
+  echo "~/second-brain not cloned yet — skipping Claude memory link; rerun install.sh after cloning"
+fi
+
 # Install CLI tools the aliases/functions in zshrc depend on (eza, bat, etc.)
 if command -v brew >/dev/null 2>&1; then
   brew bundle --file="$DOTFILES/Brewfile" || echo "brew bundle failed — rerun manually: brew bundle --file=$DOTFILES/Brewfile"
