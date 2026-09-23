@@ -40,7 +40,9 @@
     "intelligence@quandri-marketplace": true,
     "daily-usrq-report@quandri-marketplace": true,
     "bastisesh@quandri-marketplace": true,
-    "re-analyze-policy@quandri-marketplace": true
+    "re-analyze-policy@quandri-marketplace": true,
+    "ralph-loop@claude-plugins-official": true,
+    "i-have-adhd@i-have-adhd": true
   },
   "extraKnownMarketplaces": {
     "caveman": {
@@ -67,11 +69,18 @@
         "source": "github",
         "repo": "uppinote20/claude-dashboard"
       }
+    },
+    "i-have-adhd": {
+      "source": {
+        "source": "github",
+        "repo": "ayghri/i-have-adhd"
+      }
     }
   },
   "effortLevel": "medium",
   "autoDreamEnabled": true,
   "skipDangerousModePermissionPrompt": true,
   "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "skipWorkflowUsageWarning": true
 }
